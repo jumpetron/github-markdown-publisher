@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#  GitHub Markdown Publisher
 
-## Getting Started
+A minimalist **Next.js (App Router)** app that lets you **create**, **save**, and **publish** Markdown drafts directly to a GitHub repository. Drafts are stored locally (via `localStorage`) until you publish them with a click.
 
-First, run the development server:
+---
+
+##  Live Demo & Source
+
+- **Live Site:** [https://github-markdown-publisher.vercel.app/](https://github-markdown-publisher.vercel.app/)  
+- **GitHub Repository:** [jumpetron/github-markdown-publisher](https://github.com/jumpetron/github-markdown-publisher)
+
+---
+
+##  Features
+
+-  Fetches and sanitizes Markdown from GitHub and renders it as HTML.
+-  Create and save drafts (title + content).
+-  List, edit, and delete drafts easily.
+-  Publish all drafts at once—committed as `.md` files directly into your repo.
+-  Uses `react-hot-toast` for user-friendly notifications.
+
+---
+
+##  Tech Stack
+
+- **Next.js (App Router)** – framework  
+- **Tailwind CSS** – styling  
+- **markdown-it** – Markdown → HTML conversion  
+- **DOMPurify** – sanitization to prevent XSS  
+- **react-hot-toast** – toast notifications  
+- GitHub REST API – for publishing Markdown files
+
+---
+
+##  Getting Started
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/jumpetron/github-markdown-publisher.git
+cd github-markdown-publisher
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment Variables
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Create a .env file at the project root and add:
+```bash
+GITHUB_REPO=your-username/your-repo
+GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Important: Ensure your GitHub token has permission to write to the repository (e.g., contents:write or full repo scope).
+Never commit your token—.env is gitignored by default.
 
-## Learn More
+### Running Locally
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Then open your browser at http://localhost:3000.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Usage Flow
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+View existing content: The top of the page displays Markdown fetched from GitHub (e.g., hello.md).
 
-## Deploy on Vercel
+Create drafts: Use the "Save Draft" form to enter a title and body.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Manage drafts: Edit or delete saved drafts in the list.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Publish drafts: Click "Publish All" to commit each draft as a .md file to your GitHub repo.
+
+### Project Structure
+```bash
+├── app/
+│   ├── page.js                # Main UI (Markdown display, Editor, DraftList, Publish)
+│   └── api/publish/route.js   # Server API for committing drafts to GitHub
+├── components/
+│   ├── Editor.js              # Draft creation form
+│   └── DraftList.js           # Draft listing with edit/delete
+├── lib/
+│   └── github.js              # GitHub commit helper
+├── styles/                    # (if using custom styles)
+├── .env                       # Environment variables (not committed)
+└── README.md
+```
+### Future Improvements
+
+- Add per-draft publish controls (not just bulk).
+- Real-time Markdown preview in the editor.
+- Better handling of filename collisions (e.g. appending timestamps).
+- Optional authentication (e.g., GitHub OAuth) for user-specific publishing.
+- Add accessibility enhancements (ARIA attributes, focus indicators, etc.).
+
+### Final Notes
+
+This tool is perfect for quick staging of markdown posts, notes, or content drafts with seamless GitHub integration—no backend hassle required.
