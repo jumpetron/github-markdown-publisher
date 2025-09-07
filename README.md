@@ -84,14 +84,6 @@ Publish drafts: Click "Publish All" to commit each draft as a .md file to your G
 ├── .env                       # Environment variables (not committed)
 └── README.md
 ```
-### Future Improvements
-
-- Add per-draft publish controls (not just bulk).
-- Real-time Markdown preview in the editor.
-- Better handling of filename collisions (e.g. appending timestamps).
-- Optional authentication (e.g., GitHub OAuth) for user-specific publishing.
-- Add accessibility enhancements (ARIA attributes, focus indicators, etc.).
-
 ### Final Notes
 
 This tool is perfect for quick staging of markdown posts, notes, or content drafts with seamless GitHub integration—no backend hassle required.
